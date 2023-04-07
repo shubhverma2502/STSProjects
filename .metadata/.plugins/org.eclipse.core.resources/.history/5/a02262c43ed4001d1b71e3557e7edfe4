@@ -1,0 +1,22 @@
+package com.shubh.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shubh.Entity.Student;
+import com.shubh.Repository.StudentRepo;
+import com.shubh.service.StudentService;
+@Service
+public class StudentServiceImpl implements StudentService
+{
+	@Autowired
+	private StudentRepo studRepo;
+
+	@Override
+	public Student saveStudent(Student student) 
+	{
+		Student stud = studRepo.save(student);
+		return stud ;
+	}
+
+}

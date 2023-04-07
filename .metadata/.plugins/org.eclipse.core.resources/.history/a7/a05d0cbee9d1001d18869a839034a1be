@@ -1,0 +1,74 @@
+package com.shubh.serviceImpl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shubh.dto.BookRequest;
+import com.shubh.entity.Books;
+import com.shubh.exception.RecordNotFoundException;
+import com.shubh.repository.BooksRepo;
+import com.shubh.service.BookServices;
+@Service
+public class BookServiceImpl implements BookServices 
+{
+	@Autowired
+	private BooksRepo bookRepo;
+
+	@Override
+	public Books saveBook(BookRequest book) {
+		Books b1 = Books.build(0,book.getBookName(),book.getAutherName(), book.getEdition());
+		
+		return bookRepo.save(b1);
+	}
+
+	@Override
+	public Books getBookById(Integer id) throws RecordNotFoundException
+	{
+		Optional<Books> b2 = bookRepo.findById(id);
+		if(b2.isPresent())
+		{
+		return b2.get();
+		}
+		else
+		{
+			throw new RecordNotFoundException("No book record exist for given id: "+id);
+		}
+	}
+
+	@Override
+	public List<Books> getAllBooks() {
+		List<Books>bookList = bookRepo.findAll();
+		System.out.println(bookList);
+		return bookList;
+	}
+
+	@Override
+	public Books deleteBook(Integer id) throws RecordNotFoundException 
+	{
+		 Optional<Books> delete = bookRepo.findById(id);
+		if(delete.isPresent())
+		{
+			return deleteBook(id);
+		}
+		else
+		{
+			throw new RecordNotFoundException("No record exist for given id");
+		}
+		
+	}
+
+	@Override
+	public Books updateBooks(Books book,Integer id) {
+		Optional<Books>optional = bookRepo.findById(id);
+		Books books = optional.get();	
+		books.setId(id);
+		books.setBookName(book.getBookName());
+		books.setAutherName(book.getAutherName());
+		books.setEdition(book.getEdition());
+		return bookRepo.save(books);
+	}
+
+}

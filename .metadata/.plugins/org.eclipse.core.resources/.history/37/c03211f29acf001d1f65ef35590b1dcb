@@ -1,0 +1,18 @@
+package com.shubh.advice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.shubh.exception.RecordNotFoundException;
+
+public class ApplicationExceptionHandler 
+{
+	@ExceptionHandler(RecordNotFoundException.class)
+	public Map<String, String> ExceptionHandle(RecordNotFoundException ex){
+		Map<String, String> errorMap = new HashMap<>();
+		errorMap.put(null, null)
+	}
+
+}

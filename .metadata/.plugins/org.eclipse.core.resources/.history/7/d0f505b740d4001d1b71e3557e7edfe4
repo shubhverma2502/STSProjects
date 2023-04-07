@@ -1,0 +1,50 @@
+package com.shubh.serviceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shubh.Entity.Address;
+import com.shubh.Entity.Student;
+import com.shubh.Repository.StudentRepo;
+import com.shubh.service.StudentService;
+@Service
+public class StudentServiceImpl implements StudentService
+{
+	@Autowired
+	private StudentRepo studRepo;
+
+	@Override
+	public Student saveStudent(Student student) 
+	{
+		Student stud = new Student();
+		stud.setName("Dinesh");
+		stud.setCourse("MongoDB");
+		
+		
+		Address a1 = new Address();
+		a1.setStreet("Ashtbuja Road");
+		a1.setCity("Chandrapur");
+		a1.setState("Maharashtra");
+		a1.setCountry("India");
+		a1.setStudent(student);
+		
+		Address a2 = new Address();
+		a2.setStreet("Mahakali Road");
+		a2.setCity("Chandrapur");
+		a2.setState("Maharashtra");
+		a2.setCountry("India");
+		a2.setStudent(student);
+		
+		List<Address> addr = new ArrayList<>();
+		addr.add(a1);
+		addr.add(a2);
+		
+		stud.setAddr(addr);
+		Student stud1 =  studRepo.save(student);
+		return stud1 ;
+	}
+
+}

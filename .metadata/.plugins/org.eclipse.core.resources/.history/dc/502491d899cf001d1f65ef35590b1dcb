@@ -1,0 +1,5 @@
+package com.shubh.advice;
+
+public class ApplicationExceptionHandler {
+
+}

@@ -1,0 +1,74 @@
+package com.shubh.serviceImp;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shubh.Model.Employee;
+import com.shubh.repository.EmployeeRepo;
+import com.shubh.service.EmployeeService;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService 
+{
+	@Autowired
+	private EmployeeRepo empRepo;
+
+	@Override
+	public Employee saveEmp(Employee emp) {
+		Employee e1 = empRepo.save(emp);
+		return e1;
+	}
+	
+	@Override
+	public Employee getEmp(Integer id)
+	{
+		Optional<Employee> e2 = empRepo.findById(id);
+		System.out.println(e2.get());
+		return e2.get();
+	}
+
+//	@Override
+//	public List<Employee> getAllEmployee() {
+//		List<Employee>empList = empRepo.findAll();
+//		System.out.println(empList);
+//		return empList;
+//	}
+
+	@Override
+	public String findAll() {
+		List<Employee> emps = empRepo.findAll();
+		return "emps";
+	}
+	
+	@Override
+	public String deleteEmp(Integer id) {
+		 empRepo.deleteById(id);
+		 System.out.println("Employee details deleted successfully");
+		return null;
+	}
+
+	@Override
+	public Employee updateEmp(Employee emp,Integer id) 
+	{
+		Optional<Employee> ee = empRepo.findById(id);
+			Employee emp1 = ee.get();
+			emp1.setId(id);
+			emp1.setName(emp.getName());
+			emp1.setEmail(emp.getEmail());
+			emp1.setPassword(emp.getPassword());
+			emp1.setHome_no(emp.getHome_no());
+			emp1.setMobile_no(emp.getMobile_no());
+			emp1.setGender(emp.getGender());
+			emp1.setBirthdate(emp.getBirthdate());
+			emp1.setMarital_status(emp.getMarital_status());
+			emp1.setCity(emp.getCity());
+			emp1.setState(emp.getState());
+			emp1.setQualification(emp.getQualification());
+			return empRepo.save(emp1);	
+		
+	}
+
+}

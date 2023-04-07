@@ -1,0 +1,21 @@
+package com.shubh.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.shubh.entity.Product;
+import com.shubh.repository.ProductRepo;
+import com.shubh.service.ProductService;
+
+public class ProductServiceImpl implements ProductService
+{
+	@Autowired
+	private ProductRepo productRepo;
+
+	@Override
+	public Product saveProduct(Product product) 
+	{
+		Product p1 = productRepo.save(product);
+		return p1;
+	}
+
+}

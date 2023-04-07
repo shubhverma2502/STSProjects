@@ -1,0 +1,9 @@
+package com.shubh.service;
+
+import com.shubh.Entity.Student;
+import com.shubh.dto.StudentRequest;
+
+public interface StudentService 
+{
+	public Student saveStudent(StudentRequest student);
+}

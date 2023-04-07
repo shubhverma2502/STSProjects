@@ -1,0 +1,6 @@
+package com.shubh.service;
+
+public interface StudentService 
+{
+	public Student
+}

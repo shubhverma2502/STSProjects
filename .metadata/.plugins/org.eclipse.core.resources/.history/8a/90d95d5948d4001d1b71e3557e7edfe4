@@ -1,0 +1,32 @@
+package com.shubh.Entity;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Student {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int sid;
+	private String name;
+	private String course;
+	@OneToMany(targetEntity = Address.class,cascade=CascadeType.ALL)
+	@JoinColumn(name = "student_ID",referencedColumnName = "sid")
+	private List<Address> addr = new ArrayList<Address>();
+}

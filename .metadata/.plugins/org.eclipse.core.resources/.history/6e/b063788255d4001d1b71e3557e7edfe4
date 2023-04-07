@@ -1,0 +1,43 @@
+package com.shubh.serviceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.shubh.Entity.Address;
+import com.shubh.Entity.Student;
+import com.shubh.Repository.AddressRepo;
+import com.shubh.Repository.StudentRepo;
+import com.shubh.dto.StudentRequest;
+import com.shubh.service.StudentService;
+@Service
+public class StudentServiceImpl implements StudentService
+{
+	@Autowired
+	private StudentRepo studRepo;
+	@Autowired
+	private AddressRepo addrRepo;
+
+	@Override
+	public Student saveStudent(StudentRequest student) 
+	{
+		Student stud = studRepo.save(student.getStudent());
+		return stud;
+	}
+
+	@Override
+	public List<Student> getAllStudent() 
+	{
+			return studRepo.findAll();	
+	}
+
+	@Override
+	public Student getById(Integer sid) 
+	{
+		Student ss = studRepo.deleteById(sid);
+		return ss;
+	}
+
+}

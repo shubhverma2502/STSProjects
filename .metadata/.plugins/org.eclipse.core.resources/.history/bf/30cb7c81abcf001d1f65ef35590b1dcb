@@ -1,0 +1,19 @@
+package com.shubh.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class BookRequest 
+{
+	@NotBlank(message="Book Name must not be Null")
+	private String bookName;
+	@NotBlank
+	private String autherName;
+	private int edition;
+}

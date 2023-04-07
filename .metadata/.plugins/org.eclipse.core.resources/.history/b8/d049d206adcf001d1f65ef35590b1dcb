@@ -1,0 +1,19 @@
+package com.shubh.service;
+
+import java.util.List;
+
+import com.shubh.dto.BookRequest;
+import com.shubh.entity.Books;
+import com.shubh.exception.RecordNotFoundException;
+
+import jakarta.validation.Valid;
+
+public interface BookServices 
+{
+	public BookRequest saveBook(BookRequest book);
+	public Books getBookById(Integer id) throws RecordNotFoundException;
+	public List<Books> getAllBooks();
+	public void deleteBook(Integer id) throws RecordNotFoundException;
+	public Books updateBooks(Books book,Integer id);
+	
+}
